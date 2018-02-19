@@ -1,0 +1,1 @@
+// 12. Write an algorithm to determine if a linkedlist is a palindrome
