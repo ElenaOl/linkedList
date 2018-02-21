@@ -46,7 +46,6 @@ function deleteDuplicate(head){
    
 }
 
-// deleteDuplicate(head);  
 
 function print(head){
   deleteDuplicate(head); 
