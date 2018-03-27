@@ -54,8 +54,28 @@ list.addValue(8);
 list.print();
 list.reverse();
 list.print();
+function reverse (head){
+  var prev = null;
+  var current = head.next;
+  while (current !== null){
+    var next = current.next;
+    current.next = prev;
+    prev = current;
+    current = next;
+  }
+  head.next = prev;
+}
+reverse (head);
 
-
+function reverse (node){
+  if(node.next === null){
+    return node;
+  }
+  var result = reverse(node.next);
+  node.next.next = node;
+  node.next = null;
+  return result;
+}
 
 
 

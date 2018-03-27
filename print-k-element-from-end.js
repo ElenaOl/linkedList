@@ -1,5 +1,25 @@
 // 16. Implement an algorithm to find the kth to the last element of a singly linked list
 
+function printKElementFromEnd(k,node){
+  if(k <= 0 || k === undefined){
+    return;
+  }
+  var first = head;
+  var second = head;
+  for(var i=0; i<k; i++){
+    if(first === null){
+      return;
+    }
+    first=first.next;
+  }
+  while (first !== null){
+    first = first.next;
+    second = second.next;
+  }
+  return second.value;
+}
+printKElementFromEnd(1,head); 
+
 class Node {
   constructor(value){
     this.value = value;
@@ -76,3 +96,4 @@ list.addValue(1);
 list.addValue(5);
 list.print();
 list.printKElementFromEnd(5);
+
