@@ -22,6 +22,26 @@ class Node {
   n3.next = n4;
   n4.next = n5;
   n5.next = head;
+//O(2n)
+  function findLoop(node){
+    var slow = head;
+    var fast = head.next;
+    while(fast !== null && slow !== fast){
+      if(fast.next === null){
+        return false;
+      }
+      fast = fast.next.next;
+      slow = slow.next;
+      
+    }
+    if(slow === fast){
+        return true;
+    }
+    return false;
+  }
+  
+  
+  findLoop(head);
   
   function findLoop(head){
     if(head.next === null){
