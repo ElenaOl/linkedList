@@ -7,82 +7,57 @@ class Node {
   }
 }
 
-class LinkedList {
-  constructor(){
-    this.head = null;
-    this.tail = null;
+var head = new Node(6);
+var node2 = new Node(12);
+head.next = node2;
+var node3 = new Node(55);
+node2.next = node3;
+var node4 = new Node(4);
+node3.next = node4;
+
+function partition (node, num){
+  if(node.next === null){
+    return node;
   }
- addValue(value){
-    var node = new Node(value);
-    if(this.head === null){
-      this.head = node;
+  var curr = head;
+  var left = null;
+  var right = null;
+  while(curr !== null){
+    var next = curr.next;
+    if(curr.value === num){
+      var part = curr;
+      part.next = null;
+    }else if(curr.value < num){
+      curr.next = left;
+      left = curr;
     }else{
-      this.tail.next = node;
+      curr.next = right;
+      right = curr;
     }
-    this.tail = node;
+    curr = next; 
   }
-  
-  print(){
-    var current = this.head;
-    while (current !== null){
-      console.log(current.value);
-      current = current.next;
+  if(left !== null){
+    head = left;
+    curr = head;
+    while(curr.next !== null){
+      curr = curr.next;
     }
+    left = curr;
+    if(part !== undefined){
+    left.next = part;
+    left = left.next;
+    }
+    if(right !== null){
+      left.next = right;
+    }
+    // console.log(left)
+    
+  }else if(part !== undefined){
+      head = part;
+      part.next = right;
+  }else{
+    head = right;
   }
-  partition(num){
-    var current = this.head;
-    var l = null;
-    var r = null;
-    var p = null;
-    
-    // split by partition
-    while(current !== null){
-      var next = current.next;
-      if(current.value === num){
-        p = current;
-        p.next = null;
-      }else if(current.value < num){
-        current.next = l;
-        l = current;
-      }else{
-        current.next = r;
-        r = current;
-      }
-      current = next;
-    }
-    
-    // find last in l
-    current = l;
-    while(current.next !== null){
-      current = current.next;
-    }
-    
-    // merge lists
-    if(p !== null){
-      current.next = p;
-      p.next = r; 
-    }else{
-      current.next = r;
-    }
-    
-    // update list
-    this.head = l;
-    while(current.next !== null){
-      current = current.next;
-    }
-    this.tail = current;
-  }
+  return head;
 }
-
-
-const list = new LinkedList();
-list.addValue(3);
-list.addValue(1);
-list.addValue(0);
-list.addValue(7);
-list.addValue(0);
-list.addValue(1);
-list.addValue(5);
-
-list.partition(6);
-list.print();
+partition (head, 12);
