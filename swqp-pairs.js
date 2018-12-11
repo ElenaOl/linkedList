@@ -7,18 +7,16 @@ var swapPairs = function(head) {
     }
   var curr = head;
     var next = curr.next;
-    while(curr.next !== null && next.next !== null){
+    while(next !== null){
       var temp = curr.val;
       curr.val = next.val;
       next.val = temp;
       curr = curr.next.next;
-      next = next.next.next;
+      if(next.next !== null){
+        next = next.next.next;
+      }else{
+        break;
+      } 
     }
-    if(next !== null){
-      temp = curr.val;
-      curr.val = next.val;
-      next.val = temp; 
-    }
-    
     return head;  
 };
